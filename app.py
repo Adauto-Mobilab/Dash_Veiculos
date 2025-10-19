@@ -3,6 +3,7 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
+import json
 
 st.set_page_config(page_title="Dashboard - Frota de Veículos", layout="wide")
 
