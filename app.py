@@ -9,7 +9,8 @@ st.set_page_config(page_title="Dashboard - Frota de Veículos", layout="wide")
 # @st.cache_data
 def carregar_dados():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    credentials_dict = st.secrets["gcp_service_account"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
     client = gspread.authorize(creds)
     spreadsheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1hCXDALseNe30yMo39vtZiinhvZkCRPXpfAU4uuxNzo4/edit?gid=690305500")
     worksheet = spreadsheet.sheet1
