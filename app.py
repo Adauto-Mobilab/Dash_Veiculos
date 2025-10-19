@@ -3,33 +3,24 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
-<<<<<<< HEAD
-import json
-=======
 from streamlit_option_menu import option_menu
 from Dash_Proconve import fase_proconv, plotar_frota_anual
 
->>>>>>> 3c53623 (tabs update)
 
 st.set_page_config(page_title="Dashboard - Frota de Veículos", layout="wide")
 
 # @st.cache_data
 def carregar_dados():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-<<<<<<< HEAD
-    credentials_dict = st.secrets["gcp_service_account"]
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
-=======
     # -----------------------------------------------------------------------------------------------------------------------------------------------------
     
-    # credentials_dict = st.secrets["gcp_service_account"]
-    # creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
+    credentials_dict = st.secrets["gcp_service_account"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
 
     # -----------------------------------------------------------------------------------------------------------------------------------------------------
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    # creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
     # -----------------------------------------------------------------------------------------------------------------------------------------------------
 
->>>>>>> 3c53623 (tabs update)
     client = gspread.authorize(creds)
     spreadsheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1hCXDALseNe30yMo39vtZiinhvZkCRPXpfAU4uuxNzo4/edit?gid=690305500")
     worksheet = spreadsheet.sheet1
