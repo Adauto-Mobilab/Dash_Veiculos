@@ -1,2 +1,30 @@
-env
+# Ignorar ambiente virtual
+env/
+.venv/
+venv/
+
+# Ignorar credenciais e chaves privadas
 credentials.json
+*.pem
+*.key
+*.p12
+
+# Ignorar configurações do devcontainer (VS Code)
+.devcontainer/
+.vscode/
+
+# Ignorar cache e arquivos temporários
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Ignorar arquivos de build e dependências
+*.egg-info/
+dist/
+build/
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
