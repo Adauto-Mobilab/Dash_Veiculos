@@ -127,7 +127,9 @@ def fator_emissao(df):
 
     fig.update_yaxes(zeroline=True,
                      tickformat=casas_decimais)
-
+    if df_emissao.empty:
+        st.warning("Esse combustível não emite esse tipo de poluente", icon="⚠️")
+        return
     st.plotly_chart(fig, use_container_width=True)
 
     fator_emissao_total(df, option, lista_combustivel, lista_emissoes)
