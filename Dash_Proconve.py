@@ -74,6 +74,11 @@ def fase_proconv(df):
         categoryarray=ordem_fases_proconv # Passa a lista com a ordem
     )
 
+    fig.update_layout(
+        title_x=0.05,
+        title_font=dict(size=20)
+    )
+
     st.plotly_chart(fig, use_container_width=True)
     st.caption("Fonte: DETRAN/DF e Base PROCONVE")
 
@@ -95,20 +100,20 @@ def plotar_frota_anual(df_proconv_ano):
 
     # --- Definição das faixas PROCONVE ---
     limites_fase = [
-        {"nome": "PP",  "cor": "#e1f7e1", "inicio": 1987, "fim": 1987},
-        {"nome": "L-1", "cor": "#f2e6f7", "inicio": 1988, "fim": 1991},
-        {"nome": "L-2", "cor": "#e6f7ff", "inicio": 1992, "fim": 1996},
-        {"nome": "L-3", "cor": "#e6f7ff", "inicio": 1997, "fim": 2002},
-        {"nome": "L-4", "cor": "#fff8e6", "inicio": 2003, "fim": 2008},
-        {"nome": "L-5", "cor": "#f7e6e6", "inicio": 2009, "fim": 2013},
-        {"nome": "L-6", "cor": "#e1f7e1", "inicio": 2014, "fim": 2021},
-        {"nome": "L-7", "cor": "#f2e6f7", "inicio": 2022, "fim": 2024},
-        {"nome": "L-8", "cor": "#f2e6f8", "inicio": 2025, "fim": 2025},
+        {"nome": "PP",  "inicio": 1987, "fim": 1987},
+        {"nome": "L-1", "inicio": 1988, "fim": 1991},
+        {"nome": "L-2", "inicio": 1992, "fim": 1996},
+        {"nome": "L-3", "inicio": 1997, "fim": 2002},
+        {"nome": "L-4", "inicio": 2003, "fim": 2008},
+        {"nome": "L-5", "inicio": 2009, "fim": 2013},
+        {"nome": "L-6", "inicio": 2014, "fim": 2021},
+        {"nome": "L-7", "inicio": 2022, "fim": 2024},
+        {"nome": "L-8", "inicio": 2025, "fim": 2025},
     ]
 
     # --- Paleta personalizada ---
     PALETA_MOBILAB = [
-        '#FFB300', '#555555', '#888888', '#CCCCCC',
+        '#FFB300', '#e4b41c', '#c9b539', '#afb755','#94b871', '#79b98e','#5ebaaa', '#29bde3', '#0ebeff'
         
     ]
 
@@ -163,7 +168,7 @@ def plotar_frota_anual(df_proconv_ano):
                 y0=0,
                 y1=1,
                 yref="paper",
-                fillcolor=fase["cor"],
+                # fillcolor=fase["cor"],
                 opacity=0.3,
                 layer="below",
                 line_width=0,
@@ -210,5 +215,6 @@ def plotar_frota_anual(df_proconv_ano):
     # --- 5. Renderiza no Streamlit ---
     st.plotly_chart(fig, use_container_width=True)
     st.caption("Fonte: DETRAN/DF e Base PROCONVE")
+    st.subheader("Dados")
     st.dataframe(df_agrupado_anual, use_container_width=True)
         
