@@ -41,7 +41,7 @@ def fator_emissao_total(df, option, lista_combustivel, lista_emissoes):
         x='Ano',
         y='Total',
         markers=True,
-        title=f"Emissões de Totais por Ano {option}",
+        title=f"Emissões de {option} Totais por Ano",
     )
 
     fig.update_traces(
