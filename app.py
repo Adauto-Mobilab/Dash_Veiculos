@@ -7,12 +7,12 @@ from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
 from streamlit_option_menu import option_menu
 from Dash_Proconve import fase_proconv, plotar_frota_anual
-from Dash_Emissao import fator_emissao
+from Dash_Emissao import fator_emissao, CO2_frota
 
 
 st.set_page_config(page_title="Dashboard - Frota de Veículos", layout="wide")
 
-# @st.cache_data
+@st.cache_data(ttl= 300)
 def carregar_dados():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,3 +99,4 @@ elif selected == "Veículos Leves X Proconve":
 
 elif selected == "Emissão de Poluentes X Ano":
     fator_emissao(df)
+    CO2_frota()

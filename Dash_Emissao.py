@@ -15,6 +15,87 @@ def limpar_colunas(df: pd.DataFrame) -> pd.DataFrame:
     df.columns = novas_colunas
     return df
 
+def CO2_frota():
+
+    nome_abas = ['INVENTARIO GASOLINA', 'INVENTARIO ETANOL', ]#'ONIBUS-FROTA']
+    dados = {}
+    xls = pd.ExcelFile("Inventario_DF_Observatorio.xlsx")
+    cols = ['CO2 Fase de Uso (ton)', 'Ano'] 
+
+    for nome in nome_abas:
+        dados[nome] = pd.read_excel(xls, sheet_name=nome)
+        # print(nome)
+        # print(dados[nome].head())
+
+    df_comb = pd.concat([dados[k][cols] for k in nome_abas], ignore_index=True)
+    print("DF COMB")
+    print(df_comb)
+    df_soma = (
+    df_comb
+    .groupby("Ano", as_index=False)
+    .sum(numeric_only=True)
+)
+#     gasolina_total = 3.08e6
+#     etanol_total = 0
+#     categorias = ["Gasolina", "Etanol"]     # nomes das barras
+#     valores    = [gasolina_total, etanol_total]  # os valores que você já calculou
+
+#     fig = px.bar(
+#     x=categorias,
+#     y=valores,
+#     title="Comparação de CO₂ total"
+# )
+    
+#     st.plotly_chart(fig, key="barra_co2", use_container_width=True)
+
+    
+     # Cria gráfico
+    fig = px.line(
+        df_soma,
+        x='Ano',
+        y='CO2 Fase de Uso (ton)',
+        markers=True,
+        title=f"Emissões de CO2 (ton) por Ano",
+    )
+
+    fig.update_traces(
+        line=dict(color="#0ebeff", width=3),
+        marker=dict(color="#555555"),
+        # hovertemplate="Ano: %{x}<br>Valor: %{y:.casas_decimais_dff}<extra></extra>"
+    )
+
+    fig.update_layout(
+        title_x=0.05,
+        title_font=dict(size=20)
+    )
+
+    fig.update_yaxes(zeroline=True,
+                    #  tickformat=casas_decimais
+                     )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
+    gasolina_total = 3.08e6
+    etanol_total = 0
+    categorias = ["Gasolina", "Etanol"]     # nomes das barras
+    valores    = [gasolina_total, etanol_total]  # os valores que você já calculou
+
+    fig = px.bar(
+    x=categorias,
+    y=valores,
+    title="CO2 Total 2024 (Fase de Uso)"
+)
+    fig.update_xaxes(title=None)
+    fig.update_yaxes(title=None)
+    
+    st.plotly_chart(fig, key="barra_co2", use_container_width=True)
+
+    with st.expander("Dados de Emissões CO2 (fase de uso)"):
+        st.subheader("Dataframe")
+        st.dataframe(df_soma)
+
+
 def fator_emissao_total(df, option, lista_combustivel, lista_emissoes):
 
     df_emissao_total = pd.DataFrame()
@@ -132,9 +213,10 @@ def fator_emissao(df):
         return
     st.plotly_chart(fig, use_container_width=True)
 
-    fator_emissao_total(df, option, lista_combustivel, lista_emissoes)
+    # fator_emissao_total(df, option, lista_combustivel, lista_emissoes)
 
-    st.caption("Fonte: CETESB")
-    st.subheader("Dados")
-    st.dataframe(df_emissao.style.format(precision=casas_decimais_df))
+    with st.expander("Dados de Emissões"):
+        st.caption("Fonte: CETESB")
+        st.subheader("Dataframe")
+        st.dataframe(df_emissao.style.format(precision=casas_decimais_df))
 
