@@ -7,7 +7,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
 from streamlit_option_menu import option_menu
 from Dash_Proconve import fase_proconv, plotar_frota_anual
-from Dash_Emissao import fator_emissao, CO2_frota
+from Dash_Emissao import fator_emissao, emissoes_total
 
 
 st.set_page_config(page_title="Dashboard - Frota de Veículos", layout="wide")
@@ -99,4 +99,6 @@ elif selected == "Veículos Leves X Proconve":
 
 elif selected == "Emissão de Poluentes X Ano":
     fator_emissao(df)
-    CO2_frota()
+    st.divider()
+    emissoes_total(df)
+    
