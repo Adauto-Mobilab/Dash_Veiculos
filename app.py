@@ -95,7 +95,6 @@ selected = option_menu(
 
 if __name__ == "__main__":
     # só para testes locais
-    ...
 
     if selected == "Frota X Fase (Anual)":
         plotar_frota_anual(df)
