@@ -8,6 +8,7 @@ import plotly.express as px
 from streamlit_option_menu import option_menu
 from Dash_Proconve import fase_proconv, plotar_frota_anual
 from Dash_Emissao import fator_emissao, emissoes_total
+from Dash_Combustivel import Combustivel_Ano
 
 
 st.set_page_config(page_title="Dashboard - Frota de Veículos", layout="wide")
@@ -60,7 +61,7 @@ st.title("📊 Dashboard - Frota Veicular")
 
 selected = option_menu(
     menu_title=None,
-    options=["Frota X Fase (Anual)","Veículos Leves X Proconve", "Emissão de Poluentes X Ano"],
+    options=["Frota X Fase Proconve","Vendas Combustíveis X Ano", "Emissão de Poluentes X Ano"],
     # icons=["car-front", "cloud", "map"],
     orientation="horizontal",
     styles={
@@ -96,13 +97,14 @@ selected = option_menu(
 if __name__ == "__main__":
     # só para testes locais
 
-    if selected == "Frota X Fase (Anual)":
+    if selected == "Frota X Fase Proconve":
         plotar_frota_anual(df)
-    elif selected == "Veículos Leves X Proconve":
+        st.divider()
         fase_proconv(df)
+    elif selected == "Vendas Combustíveis X Ano":
+        Combustivel_Ano(df)
 
     elif selected == "Emissão de Poluentes X Ano":
         fator_emissao(df)
         st.divider()
         emissoes_total(df)
-    
