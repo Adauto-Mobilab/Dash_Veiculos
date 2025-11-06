@@ -83,7 +83,7 @@ def fase_proconv(df):
     st.caption("Fonte: DETRAN/DF e Base PROCONVE")
 
     # st.subheader("Dados")
-    with st.expander("Dados de Emissões — clique para ver "):
+    with st.expander("Dados — clique para ver "):
         st.dataframe(df_agrupado, use_container_width=True)
     
     # Opcional: Retorne o DF agrupado se for usá-lo depois
@@ -216,7 +216,7 @@ def plotar_frota_anual(df_proconv_ano):
     # --- 5. Renderiza no Streamlit ---
     st.plotly_chart(fig, use_container_width=True)
     st.caption("Fonte: DETRAN/DF e Base PROCONVE")
-    with st.expander("Dados de Emissões — clique para ver "):
+    with st.expander("Dados — clique para ver "):
         # st.subheader("Dados")
         st.dataframe(df_agrupado_anual, use_container_width=True)
         
