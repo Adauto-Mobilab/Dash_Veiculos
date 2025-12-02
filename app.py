@@ -6,7 +6,7 @@ from decimal import Decimal, InvalidOperation
 from oauth2client.service_account import ServiceAccountCredentials
 import plotly.express as px
 from streamlit_option_menu import option_menu
-from Dash_Proconve import fase_proconv, plotar_frota_anual
+from Dash_Proconve import fase_proconv, plotar_frota_anual, frota_total
 from Dash_Emissao import fator_emissao, emissoes_total
 from Dash_Combustivel import Combustivel_Ano
 
@@ -98,9 +98,11 @@ if __name__ == "__main__":
     # só para testes locais
 
     if selected == "Frota X Fase Proconve":
+        frota_total(df)
         plotar_frota_anual(df)
         st.divider()
         fase_proconv(df)
+        
     elif selected == "Vendas Combustíveis X Ano":
         Combustivel_Ano(df)
 

@@ -219,4 +219,23 @@ def plotar_frota_anual(df_proconv_ano):
     with st.expander("Dados — clique para ver "):
         # st.subheader("Dados")
         st.dataframe(df_agrupado_anual, use_container_width=True)
+
+
+
+def frota_total(df):
+    df_moto = df['Frota Motocicleta - DETRAN/DF'].dropna()
+    df_caminhao = df['Frota Caminhao - DETRAN/DF'].dropna()
+    df_onibus = df['Frota Onibus - DETRAN/DF'].dropna()
+    df_carros = df['Frota Carros - DETRAN/DF']
+    moto_total = int(df_moto.sum())
+    caminhao_total = int(df_caminhao.sum())
+    onibus_total = int(df_onibus.sum())
+    carro_total = int(df_carros.sum())
+    
+    col1, col2, col3, col4 = st.columns(4, border=True)
+
+    col1.metric(label="Frota Total de Motocicletas 1940-2025", value=moto_total,)
+    col2.metric(label="Frota Total de Caminhões 1930-2025", value=caminhao_total)
+    col3.metric(label="Frota Total de Ônibus 1964-2025", value=onibus_total)
+    col4.metric(label="Frota Total de Carros 1925-2025", value=carro_total)
         
